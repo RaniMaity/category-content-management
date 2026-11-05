@@ -1,0 +1,66 @@
+
+<%- include("partials/header") %>
+<%- include("partials/navbar") %>
+
+<div class="container my-5">
+  <div class="card mx-auto" style="max-width: 600px;">
+    <div class="card-header">
+      <h3>Edit Category</h3>
+    </div>
+
+    <div class="card-body">
+      <form id="categoryForm">
+        <div class="mb-3">
+          <label class="form-label">Category Name</label>
+          <input
+            type="text"
+            name="name"
+            class="form-control"
+            value="<%= category.name %>"
+            required
+          >
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Description</label>
+          <textarea name="description" class="form-control" required><%= category.description %></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Image URL</label>
+          <input
+            type="url"
+            name="imageurl"
+            class="form-control"
+            value="<%= category.imageurl %>"
+            required
+          >
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="/categories-page" class="btn btn-secondary">Back</a>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById("categoryForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const data = Object.fromEntries(new FormData(this).entries());
+
+    fetch("/categories/<%= category.id %>", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        alert(result.message);
+        if (result.success) window.location.href = "/categories-page";
+      });
+  });
+</script>
+
+<%- include("partials/footer") %>

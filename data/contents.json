@@ -1,0 +1,13 @@
+[
+  {
+    "id": "a4672bf2-9c7c-480a-8549-710cdd4322a4",
+    "categoryId": "66a1b526-e4ec-4193-a317-fd4daecf52c1",
+    "title": "Introduction to JavaScript",
+    "description": "JavaScript is a popular programming language used to create dynamic and interactive web applications",
+    "body": "Learn the basics of JavaScript",
+    "thumbnail": "https://images.unsplash.com/photo-1519389950473-47ba0277781c",
+    "status": "published",
+    "createdAt": "2026-11-05T11:38:48.525Z",
+    "updatedAt": "2026-11-05T11:38:48.525Z"
+  }
+]

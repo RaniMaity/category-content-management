@@ -1,0 +1,49 @@
+
+<%- include("partials/header") %>
+<%- include("partials/navbar") %>
+
+<div class="container my-5">
+  <div class="card mb-4">
+    <img
+      src="<%= category.imageurl %>"
+      class="card-img-top"
+      alt="<%= category.name %>"
+      style="height: 300px; object-fit: cover;"
+    >
+
+    <div class="card-body">
+      <h2><%= category.name %></h2>
+      <p><%= category.description %></p>
+      <a href="/categories-page" class="btn btn-secondary">Back</a>
+    </div>
+  </div>
+
+  <h3 class="mb-4">Published Contents</h3>
+
+  <div class="row">
+    <% contents.forEach((content) => { %>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <img
+            src="<%= content.thumbnail %>"
+            class="card-img-top"
+            style="height: 180px; object-fit: cover;"
+            alt="<%= content.title %>"
+          >
+
+          <div class="card-body">
+            <h5><%= content.title %></h5>
+            <p><%= content.description %></p>
+            <a href="/content/<%= content.id %>/view" class="btn btn-primary">Read More</a>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+
+    <% if (contents.length === 0) { %>
+      <p class="text-muted">No published contents in this category.</p>
+    <% } %>
+  </div>
+</div>
+
+<%- include("partials/footer") %>

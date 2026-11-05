@@ -1,0 +1,115 @@
+
+<%- include("partials/header") %>
+<%- include("partials/navbar") %>
+
+<div class="container my-5">
+  <div class="card mx-auto" style="max-width: 700px;">
+    <div class="card-header">
+      <h3>Edit Content</h3>
+    </div>
+
+    <div class="card-body">
+      <form id="contentForm">
+        <div class="mb-3">
+          <label class="form-label">Title</label>
+          <input
+            type="text"
+            name="title"
+            class="form-control"
+            value="<%= content.title %>"
+            required
+          >
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Description</label>
+          <textarea name="description" class="form-control" required><%= content.description %></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Body</label>
+          <textarea name="body" class="form-control" rows="5" required><%= content.body %></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Thumbnail URL</label>
+          <input
+            type="url"
+            name="thumbnail"
+            class="form-control"
+            value="<%= content.thumbnail %>"
+            required
+          >
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Category</label>
+          <select name="categoryId" class="form-select" required>
+            <option value="">Select Category</option>
+
+            <% categories.forEach((category) => { %>
+              <option
+                value="<%= category.id %>"
+                <%= content.categoryId === category.id ? "selected" : "" %>
+              >
+                <%= category.name %>
+              </option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label d-block">Status</label>
+
+          <div class="form-check form-check-inline">
+            <input
+              type="radio"
+              name="status"
+              value="draft"
+              class="form-check-input"
+              id="draft"
+              <%= content.status === "draft" ? "checked" : "" %>
+            >
+            <label class="form-check-label" for="draft">Draft</label>
+          </div>
+
+          <div class="form-check form-check-inline">
+            <input
+              type="radio"
+              name="status"
+              value="published"
+              class="form-check-input"
+              id="published"
+              <%= content.status === "published" ? "checked" : "" %>
+            >
+            <label class="form-check-label" for="published">Published</label>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update Content</button>
+        <a href="/contents-page" class="btn btn-secondary">Back</a>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById("contentForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const data = Object.fromEntries(new FormData(this).entries());
+
+    fetch("/content/<%= content.id %>", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        alert(result.message);
+        if (result.success) window.location.href = "/contents-page";
+      });
+  });
+</script>
+
+<%- include("partials/footer") %>

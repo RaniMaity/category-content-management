@@ -1,0 +1,56 @@
+
+<%- include("partials/header") %>
+<%- include("partials/navbar") %>
+
+<div class="container my-5">
+  <div class="d-flex justify-content-between mb-4">
+    <h2>All Categories</h2>
+    <a href="/categories/create" class="btn btn-success">Add Category</a>
+  </div>
+
+  <div class="row">
+    <% categories.forEach((category) => { %>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <img
+            src="<%= category.imageurl %>"
+            class="card-img-top"
+            alt="<%= category.name %>"
+            style="height: 180px; object-fit: cover;"
+          >
+
+          <div class="card-body">
+            <h5><%= category.name %></h5>
+            <p><%= category.description %></p>
+
+            <a href="/categories/<%= category.id %>/view" class="btn btn-primary btn-sm">View</a>
+            <a href="/categories/<%= category.id %>/edit" class="btn btn-warning btn-sm">Edit</a>
+            <button
+              class="btn btn-danger btn-sm"
+              onclick="deleteCategory('<%= category.id %>')"
+            >Delete</button>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+
+    <% if (categories.length === 0) { %>
+      <p>No categories found.</p>
+    <% } %>
+  </div>
+</div>
+
+<script>
+  function deleteCategory(id) {
+    if (!confirm("Are you sure you want to delete this category?")) return;
+
+    fetch("/categories/" + id, { method: "DELETE" })
+      .then((res) => res.json())
+      .then((result) => {
+        alert(result.message);
+        if (result.success) window.location.reload();
+      });
+  }
+</script>
+
+<%- include("partials/footer") %>

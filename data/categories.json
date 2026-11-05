@@ -1,0 +1,16 @@
+[
+  {
+    "id": "66a1b526-e4ec-4193-a317-fd4daecf52c1",
+    "name": "Technology",
+    "description": "Latest technology news, programming tutorials and digital innovation.",
+    "imageurl": "https://images.unsplash.com/photo-1519389950473-47ba0277781c",
+    "createdAt": "2026-11-05T11:37:26.967Z"
+  },
+  {
+    "id": "97ac06d2-e002-46cc-aebe-7dff6cb5d809",
+    "name": "food",
+    "description": "Explore delicious recipes",
+    "imageurl": "https://images.unsplash.com/photo-1504674900247-0877df9cc836",
+    "createdAt": "2026-11-05T11:38:02.846Z"
+  }
+]

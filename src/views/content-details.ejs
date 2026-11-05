@@ -1,0 +1,44 @@
+
+<%- include("partials/header") %>
+<%- include("partials/navbar") %>
+
+<div class="container my-5">
+  <div class="card mx-auto" style="max-width: 850px;">
+    <img
+      src="<%= content.thumbnail %>"
+      class="card-img-top"
+      alt="<%= content.title %>"
+      style="max-height: 400px; object-fit: cover;"
+    >
+
+    <div class="card-body">
+      <h2><%= content.title %></h2>
+
+      <p class="text-muted"><%= content.description %></p>
+
+      <p>
+        **Category:**
+        <% if (category) { %>
+          <a href="/categories/<%= category.id %>/view">
+            <%= category.name %>
+          </a>
+        <% } else { %>
+          Category not found
+        <% } %>
+      </p>
+
+      <p>
+        **Status:** <%= content.status %>
+      </p>
+
+      <hr>
+
+      <p><%= content.body %></p>
+
+      <a href="/contents-page" class="btn btn-secondary">Back</a>
+      <a href="/content/<%= content.id %>/edit" class="btn btn-warning">Edit</a>
+    </div>
+  </div>
+</div>
+
+<%- include("partials/footer") %>
